@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Excel Data Upload and Process</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app" class="p-4">
+      <h1 class="text-2xl font-bold mb-4">Upload Excel File</h1>
+      <input type="file" @change="onFileChange" class="mb-4" />
+      <button
+        @click="uploadFile"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Upload
+      </button>
+
+      <h2 class="text-xl font-semibold mt-6" v-if="excelData.length">
+        Excel Data
+      </h2>
+      <table v-if="excelData.length" class="min-w-full leading-normal mt-4">
+        <thead>
+          <tr>
+            <th
+              v-for="(value, key) in excelData[0]"
+              :key="key"
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              {{ key }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(row, index) in excelData" :key="index">
+            <td
+              v-for="(value, key) in row"
+              :key="key"
+              class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+            >
+              {{ value }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="./client.js"></script>
+  </body>
+</html>
